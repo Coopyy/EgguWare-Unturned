@@ -51,7 +51,9 @@ namespace EgguWare.Utilities
             T.OverrideMethod(typeof(ItemManager), typeof(hkItemManager), "getItemsInRadius", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //ItemManager
             T.OverrideMethod(typeof(Regions), typeof(hkRegions), "getRegionsInRadius", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //Regions
             T.OverrideMethod(typeof(PlayerUI), typeof(hkPlayerUI), "hitmark", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //PlayerUI
+            T.OverrideMethod(typeof(PlayerQuests), typeof(hkPlayerQuests), "isMemberOfSameGroupAs", BindingFlags.Public, BindingFlags.Instance, BindingFlags.Public, BindingFlags.Instance); //PlayerQuests
             T.Log("Overrides Complete");
+
             #endregion
         }
         void OnGUI()

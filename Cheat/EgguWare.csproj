@@ -310,6 +310,7 @@
     <Compile Include="Overrides\hkLocalHwid.cs" />
     <Compile Include="Overrides\hkPlayer.cs" />
     <Compile Include="Overrides\hkPlayerPauseUI.cs" />
+    <Compile Include="Overrides\hkPlayerQuests.cs" />
     <Compile Include="Overrides\hkPlayerUI.cs" />
     <Compile Include="Overrides\hkProvider.cs" />
     <Compile Include="Overrides\hkRegions.cs" />

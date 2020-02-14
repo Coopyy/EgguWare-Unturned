@@ -29,6 +29,8 @@ namespace EgguWare.Menu.Tabs
             }*/
             G.Settings.MiscOptions.VehicleNoClip = GUILayout.Toggle(G.Settings.MiscOptions.VehicleNoClip, "Vehicle No-Clip");
             G.Settings.MiscOptions.ShowVanishPlayers = GUILayout.Toggle(G.Settings.MiscOptions.ShowVanishPlayers, "Show Vanished Players");
+            G.Settings.MiscOptions.FullBright = GUILayout.Toggle(G.Settings.MiscOptions.FullBright, "Full Bright (Does not revert on spy)");
+            G.Settings.MiscOptions.AllOnMap = GUILayout.Toggle(G.Settings.MiscOptions.AllOnMap, "Show Players On Map");
             G.Settings.MiscOptions.SpamText = GUILayout.TextField(G.Settings.MiscOptions.SpamText);
             G.Settings.MiscOptions.Spam = GUILayout.Toggle(G.Settings.MiscOptions.Spam, "Enable Spam");
             G.Settings.MiscOptions.GrabItemThroughWalls = GUILayout.Toggle(G.Settings.MiscOptions.GrabItemThroughWalls, "Take Through Walls");

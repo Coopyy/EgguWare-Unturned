@@ -22,6 +22,11 @@ namespace EgguWare.Cheats
         void Start() => instance = this;
         void Update()
         {
+            if (G.Settings.MiscOptions.FullBright)
+            {
+                LightingManager.time = 1200U;
+            }
+
             if (Player.player)
             {
                 Player.player.look.isOrbiting = G.Settings.MiscOptions.FreeCam;

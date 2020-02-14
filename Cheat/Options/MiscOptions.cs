@@ -26,6 +26,7 @@ namespace EgguWare.Options
         public float JumpMult = 10;
         public bool LimitFOV = true;
         public int ItemGrabFOV = 50;
+        public bool AllOnMap = true;
         public bool DrawFOVCircle = true;
         public bool GrabItemThroughWalls = true;
     }
