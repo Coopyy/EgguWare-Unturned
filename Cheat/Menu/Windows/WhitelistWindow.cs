@@ -19,7 +19,6 @@ namespace EgguWare.Menu.Windows
             if (whitelistToEdit.filterItems)
             {
                 GUILayout.Space(3);
-                GUILayout.BeginVertical(style: "SelectedButtonDropdown");
                 whitelistToEdit.allowGun = GUILayout.Toggle(whitelistToEdit.allowGun, s + " Guns");
                 whitelistToEdit.allowMelee = GUILayout.Toggle(whitelistToEdit.allowMelee, s + " Melees");
                 whitelistToEdit.allowBackpack = GUILayout.Toggle(whitelistToEdit.allowBackpack, s + " Backpacks");
@@ -30,7 +29,6 @@ namespace EgguWare.Menu.Windows
                 whitelistToEdit.allowMedical = GUILayout.Toggle(whitelistToEdit.allowMedical, s + " Medical");
                 whitelistToEdit.allowThrowable = GUILayout.Toggle(whitelistToEdit.allowThrowable, s + " Throwables");
                 whitelistToEdit.allowAttachments = GUILayout.Toggle(whitelistToEdit.allowAttachments, s + " Attachments");
-                GUILayout.EndVertical();
             }
             if (GUILayout.Button("Close Window"))
                 WhitelistMenuOpen = !WhitelistMenuOpen;

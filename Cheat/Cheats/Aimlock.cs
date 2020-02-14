@@ -15,7 +15,6 @@ namespace EgguWare.Cheats
         public static bool Aiming = false;
         void Update()
         {
-            // nothing intersting here
             if (G.Settings.AimbotOptions.Aimlock)
             {
                 if (Input.GetKeyDown(G.Settings.AimbotOptions.AimlockKey))

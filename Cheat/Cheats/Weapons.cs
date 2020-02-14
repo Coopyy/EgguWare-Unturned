@@ -17,7 +17,7 @@ namespace EgguWare.Cheats
     [Comp]
     public class Weapons : MonoBehaviour
     {
-        public Rect GunInfoWin = new Rect(Screen.width - 135, 50, 120, 50);
+        public Rect GunInfoWin = new Rect(Screen.width - 135, 10, 120, 50);
         public static List<IndicatorObject> DamageIndicators = new List<IndicatorObject>();
         public static List<TracerObject> TracerLines = new List<TracerObject>();
         public static Dictionary<ushort, float> SpreadBackup = new Dictionary<ushort, float>();
@@ -31,22 +31,12 @@ namespace EgguWare.Cheats
 
                     if (!SpreadBackup.ContainsKey(gun.id))
                         SpreadBackup.Add(gun.id, gun.spreadHip);
-
-                    if (G.Settings.WeaponOptions.RemoveBurstDelay || G.Settings.WeaponOptions.RemoveHammerDelay || G.Settings.WeaponOptions.InstantReload)
-                        Player.player.equipment.isBusy = false;
-                    if (G.Settings.WeaponOptions.RemoveHammerDelay)
-                        Player.player.equipment.useable.GetType().GetField("isHammering", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(Player.player.equipment.useable, false);
-                    if (G.Settings.WeaponOptions.RemoveHammerDelay)
-                        Player.player.equipment.useable.GetType().GetField("needsRechamber", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(Player.player.equipment.useable, false);
-                    if (G.Settings.WeaponOptions.InstantReload)
-                        Player.player.equipment.useable.GetType().GetField("reloadTime", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(Player.player.equipment.useable, 0f);
-
                     if (G.Settings.WeaponOptions.NoSpread)
                     {
                         gun.spreadAim = 0f;
                         gun.spreadHip = 0f;
                     }
-                    if (G.BeingSpied || !G.Settings.WeaponOptions.NoSpread) // revert crosshair on spy
+                    if (G.BeingSpied || !G.Settings.WeaponOptions.NoSpread)
                     {
                         SpreadBackup.TryGetValue(gun.id, out var backupspread);
                         gun.spreadHip = backupspread;
@@ -166,7 +156,7 @@ namespace EgguWare.Cheats
                     IndicatorObject dmgi = new IndicatorObject
                     {
                         HitPos = ri.point,
-                        Damage = Mathf.FloorToInt(DamageTool.getPlayerArmor(ri.limb, ri.player) * currentGun.playerDamageMultiplier.multiply(ri.limb)), // big maths
+                        Damage = Mathf.FloorToInt(DamageTool.getPlayerArmor(ri.limb, ri.player) * currentGun.playerDamageMultiplier.multiply(ri.limb)),
                         ShotTime = DateTime.Now
                     };
                     DamageIndicators.Add(dmgi);

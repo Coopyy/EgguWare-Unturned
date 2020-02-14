@@ -116,10 +116,10 @@ namespace EgguWare.Cheats
                         Player player = ((SteamPlayer)obj.Object).player;
                         switch (T.GetPriority(((SteamPlayer)obj.Object).playerID.steamID.m_SteamID))
                         {
-                            case Priority.Friendly:
+                            case Priority.FRIENDLY:
                                 color = Colors.GetColor("Friendly_Player_ESP");
                                 break;
-                            case Priority.Marked:
+                            case Priority.MARKED:
                                 color = Colors.GetColor("Marked_Player_ESP");
                                 break;
                         }
@@ -134,17 +134,6 @@ namespace EgguWare.Cheats
                             string Weapon = player.equipment.asset != null ? ((SteamPlayer)obj.Object).player.equipment.asset.itemName : "None";
                             LabelText += $"<color=white> - {Weapon}</color>";
                             OutlineText += " - " + Weapon;
-                        }
-                        if (G.Settings.GlobalOptions.ViewHitboxes && G.Settings.AimbotOptions.ExpandHitboxes && G.Settings.AimbotOptions.SilentAim)
-                        {
-                            Player p = ((SteamPlayer)obj.Object).player;
-                            Vector3 W2SPlayer = T.WorldToScreen(player.transform.position);
-                            if (W2SPlayer.z >= 0)
-                            {
-                                Vector3 W2SOffset = T.WorldToScreen(new Vector3(player.transform.position.x, player.transform.position.y + G.Settings.AimbotOptions.HitboxSize, player.transform.position.z));
-                                float Distance = Vector3.Distance(W2SPlayer, W2SOffset);
-                                T.DrawCircle(Colors.GetColor("Extended_Hitbox_Circle"), new Vector2(W2SPlayer.x, W2SPlayer.y), Distance);
-                            }
                         }
                         break;
                     case ESPObject.Item:
@@ -191,55 +180,6 @@ namespace EgguWare.Cheats
                             {
                                 LabelText += $"<color=white> - </color><color=ff5a00>Unclaimed</color>";
                                 OutlineText += " - Unclaimed";
-                            }
-                        }
-                        break;
-                    case ESPObject.Storage:
-
-                        BarricadeData bdata = null;
-                        if (obj.Options.Name || G.Settings.GlobalOptions.ShowLocked)
-                        {
-                            try
-                            {
-                                BarricadeRegion r;
-                                if (BarricadeManager.tryGetInfo(((InteractableStorage)obj.Object).transform, out byte x, out byte y, out ushort plant, out ushort index, out r))
-                                    bdata = r.barricades[index];
-                            }
-                            catch (Exception ex)
-                            {
-                                Debug.Log(ex);
-                            }
-                        }
-
-                        if (obj.Options.Name)
-                        {
-                            string s = "Storage";
-                            if (bdata != null)
-                                s = bdata.barricade.asset.name.Replace("_", " ");
-
-                            LabelText += s;
-                            OutlineText += s;
-                        }
-
-                        if (G.Settings.GlobalOptions.ShowLocked)
-                        {
-                            if (bdata != null)
-                            {
-                                if (bdata.barricade.asset.isLocked)
-                                {
-                                    LabelText += $"<color=white> - Locked</color>";
-                                    OutlineText += " - Locked";
-                                }
-                                else
-                                {
-                                    LabelText += $"<color=white> - </color><color=ff5a00>Unlocked</color>";
-                                    OutlineText += " - Unlocked";
-                                }
-                            }
-                            else
-                            {
-                                LabelText += $"<color=white> - Unknown</color>";
-                                OutlineText += " - Unknown";
                             }
                         }
                         break;

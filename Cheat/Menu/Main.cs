@@ -30,18 +30,31 @@ namespace EgguWare.Menu
         public static List<GUIContent> buttons5 = new List<GUIContent>();
         public static Rect CursorPos = new Rect(0, 0, 20f, 20f);
 
-        private int i = -40;
         private Texture _cursorTexture;
-        private Rect windowRect = new Rect(80, 80, 550, 450);
-        private Rect itemRect = new Rect(400, 465, 200, 250);
-        private Rect guiRect = new Rect(100, 755, 200, 250);
+        private Rect windowRect;
+        private Rect colorRect;
+        private Rect playerRect;
+        private Rect itemRect;
+        private Rect configRect;
+        private Rect guiRect;
 
         readonly string Name = "EgguWare";
-        readonly string Version = "v1.0.6";
+        readonly string Version = "v0.9.8";
+
+        void ResetWindowPos()
+        {
+            windowRect = new Rect(20, 20, 525, 425);
+            colorRect = new Rect(20, 465, 250, 300);
+            playerRect = new Rect(565, 20, 500, 350);
+            itemRect = new Rect(565, 465, 200, 250);
+            configRect = new Rect(1285, 20, 275, 315);
+            guiRect = new Rect(1285, 355, 200, 250);
+        }
 
         void Start()
         {
             GUIColor = GUI.color;
+            ResetWindowPos();
             foreach (MenuTab val in Enum.GetValues(typeof(MenuTab)))
                 buttons.Add(new GUIContent(Enum.GetName(typeof(MenuTab), val)));
             foreach (ESPObject val in Enum.GetValues(typeof(ESPObject)))
@@ -57,64 +70,54 @@ namespace EgguWare.Menu
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.F1))
-            {
-                if (MenuOpen == false)
-                    MenuOpen = true;
-                else
-                {
-                    MenuOpen = false;
-                    i = -40;
-                }
-            }
+                MenuOpen = !MenuOpen;
         }
         void OnGUI()
         {
-            if (!G.BeingSpied && MenuOpen)
+            if (!G.BeingSpied)
             {
-                GUI.skin = AssetUtilities.Skin;
+                if (!Provider.isConnected)
+                    T.DrawOutlineLabel(new Vector2(125, 0), new Color32(34, 177, 76, 255), Color.black, $"<b>{Name} {Version}</b>");
+                if (MenuOpen)
+                {
+                    GUI.skin = AssetUtilities.Skin;
 
-                if (_cursorTexture == null)
-                    _cursorTexture = Resources.Load("UI/Cursor") as Texture;
+                    if (_cursorTexture == null)
+                        _cursorTexture = Resources.Load("UI/Cursor") as Texture;
 
-                GUI.depth = -1;
+                    GUI.depth = -1;
+                    windowRect = GUILayout.Window(0, windowRect, MenuWindow, $"{Name} {Version}");
+                    playerRect = GUILayout.Window(1, playerRect, PlayerWindow.Window, "Players");
+                    configRect = GUILayout.Window(3, configRect, ConfigWindow.Window, "Configs");
+                    if (ColorWindow.ColorMenuOpen)
+                        colorRect = GUILayout.Window(2, colorRect, ColorWindow.Window, SettingsTab.SelectedColorIdentifier.Replace("_", " "));
+                    if (WhitelistWindow.WhitelistMenuOpen)
+                        itemRect = GUILayout.Window(4, itemRect, WhitelistWindow.Window, (Cheats.Items.editingaip ? "Pickup " : "ESP ") + "Whitelist");
+                    if (GUIWindow.GUISkinMenuOpen)
+                        guiRect = GUILayout.Window(5, guiRect, GUIWindow.Window, "GUI Skins");
+                    if (DropdownWindow.DropdownOpen)
+                        GUILayout.Window(9, DropdownPos, DropdownWindow.Window, DropdownTitle);
+                    if (GUI.Button(new Rect(10, Screen.height - 50, 150, 50), "Reset Menu Positions"))
+                        ResetWindowPos();
 
+                    GUI.depth = -2;
+                    CursorPos.x = Input.mousePosition.x;
+                    CursorPos.y = Screen.height - Input.mousePosition.y;
 
-                GUIStyle guiStyle = new GUIStyle("label");
-                guiStyle.margin = new RectOffset(10, 10, 5, 5);
-                guiStyle.fontSize = 22;
-                if (i < 0)
-                    i++;
-                windowRect = GUILayout.Window(0, windowRect, MenuWindow, Enum.GetName(typeof(MenuTab), SelectedTab));
-                if (WhitelistWindow.WhitelistMenuOpen)
-                    itemRect = GUILayout.Window(4, itemRect, WhitelistWindow.Window, (Cheats.Items.editingaip ? "Pickup " : "ESP ") + "Whitelist");
-                if (GUIWindow.GUISkinMenuOpen)
-                    guiRect = GUILayout.Window(5, guiRect, GUIWindow.Window, "GUI Skins");
+                    GUI.DrawTexture(CursorPos, _cursorTexture);
+                    Cursor.lockState = CursorLockMode.None;
 
-                GUILayout.BeginArea(new Rect(0, i, Screen.width, 40), style: "NavBox");
-                GUILayout.BeginHorizontal();
-                GUI.color = new Color32(34, 177, 76, 255);
-                GUILayout.Label($"<b>{Name}</b> <size=15>{Version}</size>", guiStyle);
-                GUI.color = GUIColor;
-                SelectedTab = (MenuTab)GUILayout.Toolbar((int)SelectedTab, buttons.ToArray(), style: "TabBtn");
-                GUILayout.EndHorizontal();
-                GUILayout.EndArea();
+                    if (PlayerUI.window != null)
+                        PlayerUI.window.showCursor = true;
 
-                GUI.depth = -2;
-                CursorPos.x = Input.mousePosition.x;
-                CursorPos.y = Screen.height - Input.mousePosition.y;
-
-                GUI.DrawTexture(CursorPos, _cursorTexture);
-                Cursor.lockState = CursorLockMode.None;
-
-                if (PlayerUI.window != null)
-                    PlayerUI.window.showCursor = true;
-
-                GUI.skin = null;
+                    GUI.skin = null;
+                }
             }
         }
 
         void MenuWindow(int windowID)
         {
+            SelectedTab = (MenuTab)GUILayout.Toolbar((int)SelectedTab, buttons.ToArray());
             #region Display Selected Tab
             switch (SelectedTab)
             {
@@ -132,9 +135,6 @@ namespace EgguWare.Menu
                     break;
                 case MenuTab.Settings:
                     SettingsTab.Tab();
-                    break;
-                case MenuTab.Players:
-                    PlayersTab.Tab();
                     break;
             }
             #endregion

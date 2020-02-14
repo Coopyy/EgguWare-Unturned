@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace EgguWare.Options.ESP
 {
-    // options for each esp object
     public class ESPOptions
     {
         public bool Enabled = false;

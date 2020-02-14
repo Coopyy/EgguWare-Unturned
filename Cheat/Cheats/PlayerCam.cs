@@ -37,7 +37,6 @@ namespace EgguWare.Cheats
 
         }
 
-        // the ui here looks really stupid someone fix
         void OnGUI()
         {
             GUI.skin = AssetUtilities.Skin;

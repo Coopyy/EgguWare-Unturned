@@ -28,8 +28,6 @@ namespace EgguWare.Utilities
             AddColor("Bullet_Tracer_Color", Color.blue);
             AddColor("Silent_Aim_FOV_Circle", Color.white);
             AddColor("Aimlock_FOV_Circle", Color.white);
-            AddColor("Extended_Hitbox_Circle", Color.red);
-            AddColor("Item_FOV_Circle", Color.green);
         }
 
         public static Color32 GetColor(string identifier)

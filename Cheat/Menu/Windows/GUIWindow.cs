@@ -10,12 +10,12 @@ namespace EgguWare.Menu.Windows
     public class GUIWindow
     {
         private static Vector2 scrollPosition3 = new Vector2(0, 0);
-        public static bool GUISkinMenuOpen = false;
+        public static bool GUISkinMenuOpen = true;
         public static void Window(int windowID)
         {
-            scrollPosition3 = GUILayout.BeginScrollView(scrollPosition3, style: "SelectedButtonDropdown");
+            scrollPosition3 = GUILayout.BeginScrollView(scrollPosition3);
             if (AssetUtilities.GetSkins().Count == 0)
-                GUILayout.Label("put gui skins in /Unturned/Unturned_Data/GUISkins/");
+                GUILayout.Label("put gui skins in /Unturned/Unturned_Data/GUISkin/");
             foreach (string skin in AssetUtilities.GetSkins())
             {
                 string s = skin;

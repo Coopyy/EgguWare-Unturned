@@ -17,7 +17,6 @@ namespace EgguWare.Options
         public int HitboxSize = 15;
         public TargetLimb1 TargetL = TargetLimb1.SKULL;
         public KeyCode AimlockKey = KeyCode.F;
-        public List<ESPObject> SilentAimObjects = new List<ESPObject>();
         public bool OnlyVisible = false;
         public bool Aimlock = false;
         public bool Mouse1Aimbot = false;

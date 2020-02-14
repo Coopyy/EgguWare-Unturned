@@ -12,6 +12,7 @@ namespace EgguWare.Options
         public bool FreeCam = false;
         public bool FullBright = false;
         public bool VehicleNoClip = false;
+        public int DayTime = 1200;
         public bool Spam = false;
         public string SpamText = "egguware lol";
         public bool ShowEgguwareUser = true;
@@ -24,9 +25,5 @@ namespace EgguWare.Options
         public float PlayerFlightSpeedMult = 1;
         public float RunspeedMult = 5;
         public float JumpMult = 10;
-        public bool LimitFOV = true;
-        public int ItemGrabFOV = 50;
-        public bool DrawFOVCircle = true;
-        public bool GrabItemThroughWalls = true;
     }
 }

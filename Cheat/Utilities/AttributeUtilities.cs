@@ -15,7 +15,7 @@ namespace EgguWare.Utilities
             {
                 // Collect and add components marked with the attribute
                 if (T.IsDefined(typeof(Comp), false))
-                    Load.CO.AddComponent(T);
+                    Load.CheatObject.AddComponent(T);
             }
         }
     }

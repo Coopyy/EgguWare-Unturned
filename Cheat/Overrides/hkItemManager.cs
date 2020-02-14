@@ -11,7 +11,6 @@ namespace EgguWare.Overrides
 {
     public class hkItemManager
     {
-        // makes "nearby items" show at full 19m radius
         public static void OV_getItemsInRadius(Vector3 center, float sqrRadius, List<RegionCoordinate> search, List<InteractableItem> result)
         {
             if (ItemManager.regions == null)

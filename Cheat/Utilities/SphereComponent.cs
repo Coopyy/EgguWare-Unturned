@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace EgguWare.Utilities
 {
-    //full credits to defcon here, 2 large math for miniscule brain
     public class SphereComponent : MonoBehaviour
     {
         public GameObject Sphere;
@@ -51,12 +50,12 @@ namespace EgguWare.Utilities
         {
             while (true)
             {
-                SphereRadius = G.Settings.AimbotOptions.HitboxSize; //new hitbox size
+                SphereRadius = G.Settings.AimbotOptions.HitboxSize;
 
                 Destroy(Sphere);
 
                 Sphere = CreateICOSphere.Create("HitSphere", SphereRadius, G.Settings.AimbotOptions.AimpointMultiplier);
-                Sphere.layer = 24; //LAYERMASK.AGENT, might need updating in the future
+                Sphere.layer = LayerMasks.AGENT;
                 Sphere.transform.parent = transform;
                 Sphere.transform.localPosition = Vector3.zero;
                 Sphere.transform.localScale = SphereScale;

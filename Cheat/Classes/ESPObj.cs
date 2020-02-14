@@ -10,6 +10,7 @@ namespace EgguWare.Classes
 {
     public class ESPObj
     {
+        // yoink
         public ESPObject Target;
         public object Object;
         public GameObject GObject;

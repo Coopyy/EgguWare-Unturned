@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EgguWare.Utilities
 {
-    // https://wiki.unity3d.com/index.php/CreateIcoSphere for extra reference
+    // https://wiki.unity3d.com/index.php/CreateIcoSphere for extra referance
     public static class CreateICOSphere
     {
         private struct TriangleIndices

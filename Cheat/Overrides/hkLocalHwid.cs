@@ -11,12 +11,10 @@ namespace EgguWare.Overrides
 {
     public class hkLocalHwid
     {
-        // the hwid sent to the server
         public static byte[] OV_getHwid()
         {
             List<byte> IdentifierBytes = new List<byte>();
 
-            // instead of sending a random hwid each time you join a new server, which might not look legit, keep one hwid and let the user change it
             for (int i = 0; i < 20; i++)
                 IdentifierBytes.Add((byte)T.Random.Next(0, 100));
 

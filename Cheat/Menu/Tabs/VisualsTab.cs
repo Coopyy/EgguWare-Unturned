@@ -14,30 +14,23 @@ namespace EgguWare.Menu.Tabs
     public class VisualsTab
     {
         public static ESPObject SelectedObject = ESPObject.Player;
-        private static Vector2 scrollPosition;
         public static ESPOptions SelectedOptions = G.Settings.PlayerOptions;
         public static void Tab()
         {
-            GUILayout.Space(0);
-            GUILayout.BeginArea(new Rect(10, 35, 260, 400), style: "box", text: "ESP Selection");
-            SelectedObject = (ESPObject)GUILayout.SelectionGrid((int)SelectedObject, Main.buttons2.ToArray(), 1);
-            GUILayout.EndArea();
+            SelectedObject = (ESPObject)GUILayout.Toolbar((int)SelectedObject, Main.buttons2.ToArray());
 
-            GUILayout.BeginArea(new Rect(280, 35, 260, 400), style: "box", text: Enum.GetName(typeof(ESPObject), SelectedObject));
-            scrollPosition = GUILayout.BeginScrollView(scrollPosition);
             switch (SelectedObject)
             {
                 case ESPObject.Player:
                     SelectedOptions = G.Settings.PlayerOptions;
-                    DrawGlobals(G.Settings.PlayerOptions, "Players");
+                    DrawGlobals(G.Settings.PlayerOptions, "Players", true);
                     G.Settings.GlobalOptions.Weapon = GUILayout.Toggle(G.Settings.GlobalOptions.Weapon, "Show Weapon");
-                    G.Settings.GlobalOptions.ViewHitboxes = GUILayout.Toggle(G.Settings.GlobalOptions.ViewHitboxes, "Show Expanded Hitboxes");
+                    //G.Settings.GlobalOptions.Bone = GUILayout.Toggle(G.Settings.GlobalOptions.Bone, "Skeleton ESP"); do this oen later
                     DrawGlobals2(G.Settings.PlayerOptions);
                     break;
                 case ESPObject.Storage:
                     SelectedOptions = G.Settings.StorageOptions;
                     DrawGlobals(G.Settings.StorageOptions, "Storages");
-                    G.Settings.GlobalOptions.ShowLocked = GUILayout.Toggle(G.Settings.GlobalOptions.ShowLocked, "Show Lock State");
                     DrawGlobals2(G.Settings.StorageOptions);
                     break;
                 case ESPObject.Vehicle:
@@ -60,6 +53,7 @@ namespace EgguWare.Menu.Tabs
                     DrawGlobals2(G.Settings.BedOptions);
                     break;
                 case ESPObject.Item:
+
                     DrawGlobals(G.Settings.ItemOptions, "Items");
                     SelectedOptions = G.Settings.ItemOptions;
                     G.Settings.GlobalOptions.ListClumpedItems = GUILayout.Toggle(G.Settings.GlobalOptions.ListClumpedItems, "List Clumped Items");
@@ -83,11 +77,9 @@ namespace EgguWare.Menu.Tabs
                     DrawGlobals2(G.Settings.FlagOptions);
                     break;
             }
-            GUILayout.EndScrollView();
-            GUILayout.EndArea();
         }
 
-        private static void DrawGlobals(ESPOptions options, string objname)
+        private static void DrawGlobals(ESPOptions options, string objname, bool isplayer = false)
         {
             GUILayout.Space(2);
             options.Enabled = GUILayout.Toggle(options.Enabled, objname + " - Enabled");

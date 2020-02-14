@@ -23,19 +23,6 @@ namespace EgguWare.Overrides
         public static RaycastInfo SetupRaycast(Ray ray, float range, int mask)
         {
             RaycastInfo info;
-            /*
-            if (G.Settings.AimbotOptions.SilentAim && ((ItemGunAsset)Player.player.equipment.asset) != null && T.GetNearestPlayer() != null && T.ValidSAimPlayer(T.GetNearestPlayer()))
-            {
-                info = SilentAimRaycast(ray, range, mask);
-            }
-            else if (G.Settings.AimbotOptions.SilentAim && T.GetNearestPlayer() != null && T.ValidSAimPlayer(T.GetNearestPlayer()))
-            {
-                info = SilentAimRaycast(ray, 15.5f, mask);
-            }
-            else
-                info = OriginalRaycast(ray, range, mask);
-            */
-
             if (G.Settings.AimbotOptions.SilentAim && SilAimRaycast(out RaycastInfo ri))
                 info = ri;
             else
@@ -120,7 +107,6 @@ namespace EgguWare.Overrides
                 point = T.GetLimbPosition(aimplayer.gameObject.transform, "Right_Leg");
             else if (!GetPoint(aimplayer.gameObject, Player.player.look.aim.position, Range, out point))
                 return false;
-
 
             ELimb lomb;
             if (G.Settings.AimbotOptions.TargetL == TargetLimb1.RANDOM)

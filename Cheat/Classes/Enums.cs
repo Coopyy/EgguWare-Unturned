@@ -12,7 +12,6 @@ namespace EgguWare.Classes
         Aimbot,
         Misc,
         Weapons,
-        Players,
         Settings
     }
 
@@ -46,7 +45,7 @@ namespace EgguWare.Classes
         RANDOM,
         GLOBAL
     }
-    // probably a better way tot do this
+
     public enum TargetLimb1
     {
         LEFT_FOOT = 0,
@@ -68,18 +67,18 @@ namespace EgguWare.Classes
 
     public enum Priority
     {
-        None = 1,
-        Friendly = 2,
-        Marked = 3
+        NONE = 1,
+        FRIENDLY = 2,
+        MARKED = 3
     }
 
     public enum Mute
     {
-        None = 1,
-        All = 2,
-        Global = 3,
-        Area = 4,
-        Group = 5
+        NONE = 1,
+        ALL = 2,
+        GLOBAL = 3,
+        AREA = 4,
+        GROUP = 5
     }
 
     public enum MiscOptions

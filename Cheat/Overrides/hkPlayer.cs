@@ -22,7 +22,7 @@ namespace EgguWare.Overrides
 
         private IEnumerator takeScreenshot()
         {
-            if (Time.realtimeSinceStartup - LastSpy < 0.5 /* no spam spy */ || G.BeingSpied)
+            if (Time.realtimeSinceStartup - LastSpy < 0.5 || G.BeingSpied)
                 yield break;
 
             G.BeingSpied = true;

@@ -17,7 +17,9 @@ namespace EgguWare.Cheats
         FieldInfo standSpeed = typeof(PlayerMovement).GetField("SPEED_STAND", BindingFlags.NonPublic | BindingFlags.Static);
         FieldInfo sprintSpeed = typeof(PlayerMovement).GetField("SPEED_SPRINT", BindingFlags.NonPublic | BindingFlags.Static);
         FieldInfo proneSpeed = typeof(PlayerMovement).GetField("SPEED_PRONE", BindingFlags.NonPublic | BindingFlags.Static);
+        FieldInfo swimSpeed = typeof(PlayerMovement).GetField("SPEED_SWIM", BindingFlags.NonPublic | BindingFlags.Static);
         FieldInfo jumpHeight = typeof(PlayerMovement).GetField("JUMP", BindingFlags.NonPublic | BindingFlags.Static);
+        FieldInfo vehiclespeed = typeof(PlayerMovement).GetField("_speed", BindingFlags.NonPublic | BindingFlags.Static);
         private static readonly float SPEED_STAND = 4.5f;
 		private static readonly float SPEED_PRONE = 1.5f;
 		private static readonly float SPEED_SPRINT = 7f;
@@ -48,6 +50,7 @@ namespace EgguWare.Cheats
             }
         }
 
+        // credits to thanking
         public static void PlayerFlight()
         {
             if (Player.player == null)

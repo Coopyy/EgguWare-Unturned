@@ -11,7 +11,7 @@ namespace EgguWare.Overrides
     {
         public static void OV_getRegionsInRadius(Vector3 center, float radius, List<RegionCoordinate> result)
 		{
-            radius = 19; // can be changed by a user, good idea yes
+            radius = 19;
 			byte b;
 			byte b2;
 			if (!Regions.tryGetCoordinate(center, out b, out b2))

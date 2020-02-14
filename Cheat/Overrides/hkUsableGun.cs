@@ -21,7 +21,6 @@ namespace EgguWare.Overrides
             BulletsField = typeof(UseableGun).GetField("bullets", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         }
 
-        // adding an override to only send the silent aim raycast if the bullets are at the end of their travel
         public void OV_ballistics()
         {
             Useable PlayerUse = Player.player.equipment.useable;

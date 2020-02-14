@@ -11,6 +11,6 @@ namespace EgguWare.Overrides
 {
     public class hkPlayerPauseUI
     {
-        public static void OV_onClickedExitButton(SleekButton button) => Provider.disconnect(); // bypass leave time agan/* volume */
+        public static void OV_onClickedExitButton(SleekButton button) => Provider.disconnect();
     }
 }

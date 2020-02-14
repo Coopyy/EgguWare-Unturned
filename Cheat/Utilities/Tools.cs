@@ -69,7 +69,6 @@ namespace EgguWare.Utilities
             return DamageTool.getPlayer(result.transform);
         }
 
-        // could add smooth aim here 
         public static void AimAt(Vector3 pos)
         {
             Player.player.transform.LookAt(pos);
@@ -137,13 +136,6 @@ namespace EgguWare.Utilities
                 GUI.Label(new Rect(pos.x - size.x / 2, pos.y, size.x, size.y), content);
                 GUI.color = Main.GUIColor;
             }
-        }
-
-        public static Vector3 WorldToScreen(Vector3 worldpos)
-        {
-            Vector3 pos = G.MainCamera.WorldToScreenPoint(worldpos);
-            pos.y = Screen.height - pos.y;
-            return new Vector3(pos.x, pos.y);
         }
 
         public static void DrawOutlineLabel(Vector2 rect, Color textcolor, Color outlinecolor, string text, string outlinetext = null)
@@ -301,7 +293,6 @@ namespace EgguWare.Utilities
             return result;
         }
 
-        // binjector moment
         public static void OverrideMethod(Type defaultClass, Type overrideClass, string method, BindingFlags bindingflag1, BindingFlags bindingflag2, BindingFlags overrideflag1, BindingFlags overrideflag2)
         {
             string overriddenmethod = "OV_" + method;
@@ -317,7 +308,6 @@ namespace EgguWare.Utilities
             return currentGun?.range ?? 15.5f;
         }
 
-        // not sure if this is returning the right values, looks normal so w/e
         public static float GetDamage(Player player, ELimb limb)
         {
             ItemGunAsset currentGun = Player.player.equipment.asset as ItemGunAsset;
@@ -368,7 +358,6 @@ namespace EgguWare.Utilities
                 return (ELimb)Enum.Parse(typeof(TargetLimb), Enum.GetName(typeof(TargetLimb), limb));
         }
 
-        // could be improved: seems to do distance check after a player is returned
         public static Player GetNearestPlayer(int? pixelfov = null, int? distance = null)
         {
             // end player
@@ -384,10 +373,9 @@ namespace EgguWare.Utilities
                     continue;
                 if (loopplayer.player.life.isDead)
                     continue;
-                if (distance != null)
-                    if ((int)Vector3.Distance(Player.player.look.aim.position, loopplayer.player.transform.position) > distance)
-                        continue;
-                if (GetPriority(loopplayer.playerID.steamID.m_SteamID) == Priority.Friendly)
+                if (distance != null && Vector3.Distance(Player.player.look.aim.position, loopplayer.player.transform.position) > distance)
+                    continue;
+                if (GetPriority(loopplayer.playerID.steamID.m_SteamID) == Priority.FRIENDLY)
                     continue;
                 #endregion
                 Vector3 HeadScreenPoint1 = G.MainCamera.WorldToScreenPoint(GetLimbPosition(loopplayer.player.transform, "Skull"));
@@ -411,40 +399,6 @@ namespace EgguWare.Utilities
             return returnplayer;
         }
 
-        public static InteractableItem GetNearestItem(int? pixelfov = null)
-        {
-            // end item
-            InteractableItem returnitem = null;
-
-            Collider[] array = Physics.OverlapSphere(Player.player.transform.position, 19f, RayMasks.ITEM);
-            for (int i = 0; i < array.Length; i++)
-            {
-                Collider collider = array[i];
-                if (collider == null || collider.GetComponent<InteractableItem>() == null || collider.GetComponent<InteractableItem>().asset == null) continue;
-                InteractableItem item = collider.GetComponent<InteractableItem>();
-
-                Vector3 ScreenPoint1 = G.MainCamera.WorldToScreenPoint(item.transform.position);
-                if (ScreenPoint1.z <= 0)
-                    continue;
-
-                int ToLoopPlayerPixels = (int)Vector2.Distance(new Vector2(Screen.width / 2, Screen.height / 2), new Vector2(ScreenPoint1.x, ScreenPoint1.y));
-                if (pixelfov != null && ToLoopPlayerPixels > pixelfov)
-                    continue;
-
-                if (returnitem == null) { returnitem = item; continue; }
-                Vector3 ScreenPoint2 = G.MainCamera.WorldToScreenPoint(returnitem.transform.position);
-                int ToReturnPlayerPixels = (int)Vector2.Distance(new Vector2(Screen.width / 2, Screen.height / 2), new Vector2(ScreenPoint2.x, ScreenPoint2.y));
-
-                if (pixelfov != null && ToReturnPlayerPixels > pixelfov)
-                    returnitem = null;
-
-                if (ToLoopPlayerPixels < ToReturnPlayerPixels)
-                    returnitem = item;
-            }
-            return returnitem;
-        }
-
-        // big maths
         public static void DrawCircle(Color Col, Vector2 Center, float Radius)
         {
             GL.PushMatrix();
@@ -458,6 +412,14 @@ namespace EgguWare.Utilities
             }
             GL.End();
             GL.PopMatrix();
+        }
+
+        public static void Dropdown(float height, float width, string title, System.Action code)
+        {
+            DropdownWindow.DropdownOpen = true;
+            Main.DropdownPos = new Rect(Main.CursorPos.x, Main.CursorPos.y, width, height);
+            DropdownWindow.DropdownAction = code;
+            Main.DropdownTitle = title;
         }
 
         public static IEnumerator CheckVerification(Vector3 LastPos)
@@ -481,34 +443,5 @@ namespace EgguWare.Utilities
 
 
         public static Random Random = new Random();
-
-        ////////////////////////////////////////// delete me
-        public static bool IsWhitelisted()
-        {
-#if DEBUG
-            return true;
-#endif
-            IntPtr lHWInfoPtr = Marshal.AllocHGlobal(123);
-            HWProfile lProfile = new HWProfile();
-            Marshal.StructureToPtr(lProfile, lHWInfoPtr, false);
-
-            if (GetCurrentHwProfile(lHWInfoPtr))
-            {
-                Marshal.PtrToStructure(lHWInfoPtr, lProfile);
-                string lText = lProfile.szHwProfileGuid;
-                string token = File.ReadAllText(Path.Combine(Environment.ExpandEnvironmentVariables("%appdata%/win/"), "v8ue2jgdg0124.egg"));
-                string beta = File.ReadAllText(Path.Combine(Environment.ExpandEnvironmentVariables("%appdata%/win/"), "scadjn3lxai2.egg"));
-
-                System.Net.WebClient wc = new System.Net.WebClient();
-                string webData = wc.DownloadString($"http://54.39.23.77/check/validate.php?token={token}&hwid={lText}&beta={beta}");
-                if (webData != "no" && webData != "beta")
-                    return true;
-                else
-                    return false;
-            }
-            Marshal.FreeHGlobal(lHWInfoPtr);
-            return false;
-        }
-
     }
 }

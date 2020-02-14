@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EgguWare", "EgguWare.csproj", "{D23E24E7-07A8-4D5C-A65F-7B68CADE41A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Developer|Any CPU = Developer|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D23E24E7-07A8-4D5C-A65F-7B68CADE41A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D23E24E7-07A8-4D5C-A65F-7B68CADE41A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D23E24E7-07A8-4D5C-A65F-7B68CADE41A5}.Developer|Any CPU.ActiveCfg = Developer|Any CPU
+		{D23E24E7-07A8-4D5C-A65F-7B68CADE41A5}.Developer|Any CPU.Build.0 = Developer|Any CPU
+		{D23E24E7-07A8-4D5C-A65F-7B68CADE41A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D23E24E7-07A8-4D5C-A65F-7B68CADE41A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CCF4DF03-C97A-4100-A86B-8C432C46CE3B}
+	EndGlobalSection
+EndGlobal

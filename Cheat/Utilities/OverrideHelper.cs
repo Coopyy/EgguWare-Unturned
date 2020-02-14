@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace EgguWare.Utilities
 {
-    // dont remember where this was from tbh
     public class OverrideHelper
     {
+        // not made by me
         [DllImport("mono.dll", CallingConvention = CallingConvention.FastCall, EntryPoint = "mono_domain_get")]
         private static extern IntPtr mono_domain_get();
 

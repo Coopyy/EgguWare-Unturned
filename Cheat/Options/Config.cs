@@ -9,6 +9,8 @@ namespace EgguWare.Options
 {
     public class Config
     {
+        // ill clean this up later
+        
         public ESPOptions BedOptions = new ESPOptions();
         public ESPOptions PlayerOptions = new ESPOptions();
         public ESPOptions ItemOptions = new ESPOptions();

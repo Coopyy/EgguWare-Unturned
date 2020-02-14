@@ -14,13 +14,13 @@ namespace EgguWare.Overrides
         public static void OV_receiveChatMessage(CSteamID speakerSteamID, string iconURL, EChatMode mode, Color color, bool isRich, string text)
         {
             G.Settings.Mute.TryGetValue(speakerSteamID.m_SteamID, out Mute MuteState);
-            if (MuteState == Mute.All)
+            if (MuteState == Mute.ALL)
                 return;
-            if (MuteState == Mute.Global && mode == EChatMode.GLOBAL)
+            if (MuteState == Mute.GLOBAL && mode == EChatMode.GLOBAL)
                 return;
-            if (MuteState == Mute.Area && mode == EChatMode.LOCAL)
+            if (MuteState == Mute.AREA && mode == EChatMode.LOCAL)
                 return;
-            if (MuteState == Mute.Group && mode == EChatMode.GROUP)
+            if (MuteState == Mute.GROUP && mode == EChatMode.GROUP)
                 return;
             text = text.Trim();
             ControlsSettings.formatPluginHotkeysIntoText(ref text);

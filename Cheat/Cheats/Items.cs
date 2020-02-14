@@ -31,25 +31,6 @@ namespace EgguWare.Cheats
                         item.use();
                 }
             }
-
-            if (G.Settings.MiscOptions.GrabItemThroughWalls && Input.GetKeyDown(KeyCode.F))
-            {
-                int? fov = null;
-                if (G.Settings.MiscOptions.LimitFOV)
-                    fov = G.Settings.MiscOptions.ItemGrabFOV;
-                InteractableItem i = T.GetNearestItem(fov);
-                if (i != null)
-                    i.use();
-            }
-        }
-
-        void OnGUI()
-        {
-            if (!G.BeingSpied && Provider.isConnected)
-            {
-                if (G.Settings.MiscOptions.GrabItemThroughWalls && G.Settings.MiscOptions.LimitFOV && G.Settings.MiscOptions.DrawFOVCircle)
-                    T.DrawCircle(Colors.GetColor("Item_FOV_Circle"), new Vector2(Screen.width / 2, Screen.height / 2), G.Settings.MiscOptions.ItemGrabFOV);
-            }
         }
 
         IEnumerator RefreshClumpedItems()

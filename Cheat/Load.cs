@@ -11,13 +11,11 @@ using UnityEngine;
 
 public static class Load
 {
-    public static GameObject CO;
+    public static GameObject CheatObject;
     public static void Start()
     {
-        //create new gameobject
-        CO = new GameObject();
-        UnityEngine.Object.DontDestroyOnLoad(CO);
-        //let manager use the unity functions
-        CO.AddComponent<Manager>();
+        CheatObject = new GameObject();
+        UnityEngine.Object.DontDestroyOnLoad(CheatObject);
+        CheatObject.AddComponent<Manager>();
     }
 }

@@ -22,14 +22,11 @@ namespace EgguWare.Options.ESP
         #endregion
         #region Player
         public bool Weapon = true;
-        public bool ViewHitboxes = true;
+        // public bool Bone;
         #endregion
         #region Vehicle
         public bool VehicleLocked = true;
         public bool OnlyUnlocked = false;
-        #endregion
-        #region Storage
-        public bool ShowLocked = true;
         #endregion
         #region Other
         public Dictionary<string, Color32> GlobalColors = new Dictionary<string, Color32>();

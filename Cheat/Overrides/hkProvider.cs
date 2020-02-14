@@ -11,9 +11,10 @@ namespace EgguWare.Overrides
 {
     public class hkProvider
     {
-        public static bool OV_onApplicationWantsToQuit() //bypasses nolsons leave timer
+        public static void OV_OnApplicationQuit(CSteamID steamid)
 		{
-            return true;
+            Provider.disconnect();
+            Process.GetCurrentProcess().Kill();
         }
     }
 }

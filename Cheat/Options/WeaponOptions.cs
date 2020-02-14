@@ -15,11 +15,5 @@ namespace EgguWare.Options
         public bool TracerLines = true;
         public int TracerTime = 4;
         public bool DamageIndicators = true;
-        public bool DamageIndicatorDamageScaling = true;
-        public bool HitmarkerBonk = true;
-
-        public bool RemoveHammerDelay = false;
-        public bool RemoveBurstDelay = false;
-        public bool InstantReload = false;
     }
 }
