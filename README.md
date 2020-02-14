@@ -22,8 +22,7 @@ UnityEngine.UI.dll
 3. drag EgguWare.dll into dnspy
 4. open the unity dll dropdown and navegate to <modules> ![aaa](https://cdn.discordapp.com/attachments/435943029740666880/677927779622191137/unknown.png)
 5. right click <module> and click "Create Method"
-6. tick SpecialName, RTSpecialName and Static. Untick HideBySig and type in ".cctor" for the Name. it should look like this
-  ![aasdsd](https://cdn.discordapp.com/attachments/435943029740666880/677928480469418008/unknown.png)
+6. tick SpecialName, RTSpecialName and Static. Untick HideBySig and type in ".cctor" for the Name. it should look like this ![aasdsd](https://cdn.discordapp.com/attachments/435943029740666880/677928480469418008/unknown.png)
 7. press ok, then right click ".cctor() void" under <modules>, "and press edit method body"
 8. change "body type" to IL
 9. right click anywhere in the open box, and press "append new instruction", under OpCode where it says "nop", click that and change it to "call"
