@@ -67,7 +67,7 @@ namespace EgguWare.Cheats
                         if (!T.IsItemWhitelisted(i, G.Settings.MiscOptions.ESPWhitelist) || IsAlreadyClumped(i))
                             continue;
 
-                        Collider[] array = Physics.OverlapSphere(i.transform.position, G.Settings.GlobalOptions.DistanceThreshhold, RayMasks.ITEM);
+                        Collider[] array = Physics.OverlapSphere(i.transform.position, G.Settings.GlobalOptions.DistanceThreshold, RayMasks.ITEM);
                         List<InteractableItem> tempitems = new List<InteractableItem>();
                         for (int iq = 0; iq < array.Length; iq++)
                         {
@@ -78,7 +78,7 @@ namespace EgguWare.Cheats
                                 continue;
                             tempitems.Add(item);
                         }
-                        if (tempitems.Count >= G.Settings.GlobalOptions.CountThreshhold)
+                        if (tempitems.Count >= G.Settings.GlobalOptions.CountThreshold)
                             ESP.ItemClumps.Add(new ItemClumpObject(tempitems, i.transform.position));
                     }
                 }

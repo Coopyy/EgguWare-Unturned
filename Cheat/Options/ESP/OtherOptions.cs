@@ -17,8 +17,8 @@ namespace EgguWare.Options.ESP
         #endregion
         #region Items
         public bool ListClumpedItems = false;
-        public float DistanceThreshhold = 3;
-        public int CountThreshhold = 5;
+        public float DistanceThreshold = 3;
+        public int CountThreshold = 5;
         #endregion
         #region Player
         public bool Weapon = true;

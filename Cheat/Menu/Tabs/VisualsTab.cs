@@ -65,10 +65,10 @@ namespace EgguWare.Menu.Tabs
                     G.Settings.GlobalOptions.ListClumpedItems = GUILayout.Toggle(G.Settings.GlobalOptions.ListClumpedItems, "List Clumped Items");
                     if (G.Settings.GlobalOptions.ListClumpedItems)
                     {
-                        GUILayout.Label("Clump Item Distance Minimum: " + Math.Round(G.Settings.GlobalOptions.DistanceThreshhold, 1).ToString() + "m");
-                        G.Settings.GlobalOptions.DistanceThreshhold = GUILayout.HorizontalSlider(G.Settings.GlobalOptions.DistanceThreshhold, 0.1f, 15);
-                        GUILayout.Label("Item Count Minimum: " + G.Settings.GlobalOptions.CountThreshhold);
-                        G.Settings.GlobalOptions.CountThreshhold = (int)GUILayout.HorizontalSlider(G.Settings.GlobalOptions.CountThreshhold, 2, 10);
+                        GUILayout.Label("Clump Item Distance Minimum: " + Math.Round(G.Settings.GlobalOptions.DistanceThreshold, 1).ToString() + "m");
+                        G.Settings.GlobalOptions.DistanceThreshold = GUILayout.HorizontalSlider(G.Settings.GlobalOptions.DistanceThreshold, 0.1f, 15);
+                        GUILayout.Label("Item Count Minimum: " + G.Settings.GlobalOptions.CountThreshold);
+                        G.Settings.GlobalOptions.CountThreshold = (int)GUILayout.HorizontalSlider(G.Settings.GlobalOptions.CountThreshold, 2, 10);
                     }
                     if (GUILayout.Button("Open Whitelist Menu"))
                     {
