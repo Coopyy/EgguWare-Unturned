@@ -478,37 +478,6 @@ namespace EgguWare.Utilities
             }
         }
 
-
-
         public static Random Random = new Random();
-
-        ////////////////////////////////////////// delete me
-        public static bool IsWhitelisted()
-        {
-#if DEBUG
-            return true;
-#endif
-            IntPtr lHWInfoPtr = Marshal.AllocHGlobal(123);
-            HWProfile lProfile = new HWProfile();
-            Marshal.StructureToPtr(lProfile, lHWInfoPtr, false);
-
-            if (GetCurrentHwProfile(lHWInfoPtr))
-            {
-                Marshal.PtrToStructure(lHWInfoPtr, lProfile);
-                string lText = lProfile.szHwProfileGuid;
-                string token = File.ReadAllText(Path.Combine(Environment.ExpandEnvironmentVariables("%appdata%/win/"), "v8ue2jgdg0124.egg"));
-                string beta = File.ReadAllText(Path.Combine(Environment.ExpandEnvironmentVariables("%appdata%/win/"), "scadjn3lxai2.egg"));
-
-                System.Net.WebClient wc = new System.Net.WebClient();
-                string webData = wc.DownloadString($"http://54.39.23.77/check/validate.php?token={token}&hwid={lText}&beta={beta}");
-                if (webData != "no" && webData != "beta")
-                    return true;
-                else
-                    return false;
-            }
-            Marshal.FreeHGlobal(lHWInfoPtr);
-            return false;
-        }
-
     }
 }
