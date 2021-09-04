@@ -2,6 +2,8 @@
 ultra gamer unturned cheat.
 source only, youre gonna have to find your own bypass/loader
 
+Updated fork by Gazzi that fixed some outdated stuff: https://github.com/GazziFX/EgguWare-Unturned
+
 ## screenshots
 
 ![ss2](https://cdn.discordapp.com/attachments/435943029740666880/681285701287149691/unknown.png)
