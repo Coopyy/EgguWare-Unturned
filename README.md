@@ -2,7 +2,7 @@
 ultra gamer unturned cheat.
 source only, youre gonna have to find your own bypass/loader
 
-Updated fork by Gazzi that fixed some outdated stuff: https://github.com/GazziFX/EgguWare-Unturned
+Updated version of the cheat (not updated by me): https://www.unknowncheats.me/forum/other-fps-games/475356-egguware-unturned-cheat-updated.html
 
 ## screenshots
 
