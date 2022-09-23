@@ -6,7 +6,7 @@ Updated version of the cheat (not updated by me): https://www.unknowncheats.me/f
 
 ## screenshots
 
-![ss2](https://cdn.discordapp.com/attachments/435943029740666880/681285701287149691/unknown.png)
+![ss2](https://i.imgur.com/vCgvXBM.png)
 
 ## features
 * visuals
